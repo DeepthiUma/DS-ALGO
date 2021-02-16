@@ -55,7 +55,6 @@ int dequeue()
         item[i] = item[i+1];
     }
     rear--;
-    count --;
     return n;
 }
 int peek()
