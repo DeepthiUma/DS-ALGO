@@ -79,6 +79,47 @@ char* reverse(char* inputStr)
 
     return ch;
 }
+//Edge Casee
+// (
+// (()
+// )(
+// ))
+bool balExpression(char* inputStr)
+{
+    int rv = false;
+    int len = strlen(inputStr);
+    Stack *rSt = createStack(len);
+    int i = 0;
+    char ch;
+    while(inputStr[i] != '\0')
+    {
+        if(isLeftExpression(inputStr[i]))
+            push(rSt, inputStr[i]);
+        if(isRightExpression(inputStr[i]))
+        {
+              if(true == rSt->isEmpty(rSt)) return false;
+              ch = peek(rSt);
+              if(isBracketMatch(inputStr[i], ch))
+                return false;
+              rSt->top--;
+        }
+        i++;
+    }
+    return rSt->isEmpty(rSt);
+}
+bool isLeftExpression(char left)
+{
+    return (left == '(' || left == '[' || left == '<' || left == '{');
+}
+bool isRightExpression(char right)
+{
+    return (right == ')' || right == ']' || right == '>' || right == '}');
+}
+bool isBracketMatch(char left, char right)
+{
+    return ((left == '(' && right == ')') || (left == '[' && right == ']') ||
+                (left == '<' && right == '>')  || (left == '{' && right == '}'));
+}
 };
 
 int main()
