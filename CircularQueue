@@ -22,18 +22,24 @@ Queue(int N)
     count = 0;
     capacity = N;
 }
+// 10 20 30 0 0 
 void enqueue(int data)
 {
-    if(isFull()) cout<< "Queue is full" << endl;
-    cout << "rear" << rear << endl;
-    item[rear] = data;
-    rear = (rear + 1)%capacity;
-    count++;
+    if(isFull()) {
+        cout<< "Queue is full" << endl;
+        cout << "count: " << count << endl;
+    }
+    else
+    {
+        item[rear] = data;
+        rear = (rear + 1)%capacity;
+        count++;
+    }
 }
 void print()
 {
     if(isEmpty()) cout << "Queue is Empty" << endl;
-    for(int i=0;i<count;i++)
+    for(int i=0;i<capacity;i++)
         cout << item[i] << " ";
     cout << endl;
 }
@@ -49,8 +55,7 @@ int dequeue()
 {
     // 0 0 90 80 70
     // 0     3
-    if(isEmpty()) 
-    {
+    if(isEmpty()){
         cout << "Queue is Empty" << endl;
         return -1;
     }
@@ -74,17 +79,13 @@ int main()
     q->enqueue(80);
     q->enqueue(70);
     q->print();
-    cout << "DEQUEUE" << q->dequeue() << endl;
-    //cout << "DEQUEUE" << q->dequeue() << endl;
-    //cout << "DEQUEUE" << q->dequeue() << endl;
-    //cout << "DEQUEUE" << q->dequeue() << endl;
+    cout << "DEQUEUE: " << q->dequeue() << endl;
     q->print();
     cout << "PEEK: " << q->peek() << endl;
     q->enqueue(60);
     q->enqueue(50);
     q->enqueue(40); 
-     q->enqueue(30); 
+    q->enqueue(30); 
     q->print();
     return 0;
 }
-
